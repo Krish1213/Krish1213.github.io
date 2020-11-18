@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Krish1213.github.io</id>
     <title>晓伟的小站</title>
-    <updated>2020-11-18T02:10:34.546Z</updated>
+    <updated>2020-11-18T02:20:20.232Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Krish1213.github.io"/>
     <link rel="self" href="https://Krish1213.github.io/atom.xml"/>
@@ -16,12 +16,5 @@
         <link href="https://Krish1213.github.io/post/ni-hao-huan-ying-lai-dao-wo-de-xiao-zhan/">
         </link>
         <updated>2020-11-18T01:46:25.000Z</updated>
-        <content type="html"><![CDATA[<p>已经把这个小站挂到我的GitHub上好久了，但今天才想起来我有一个Blog哈哈！</p>
-<p>这个博客是一个简易的静态博客，托管在GitHub上，我目前还是个编程小白哈哈。等这两个月我突击   学习一下Linux和服务器这些东西后，我打算把租用一个学生机，再申请一个域名，然后把我的Blog挂   上去，后期再慢慢打磨这个Blog。💪💪💪</p>
-<p>关于这个Blog里面会更新什么呢？我觉得更多是我本人无聊的牢骚话、流水账啊这些，当然我也会阶段性的把我在IT上学到的一些东西分享上去。</p>
-<p>欢迎常来玩，不用评论也不用点赞，因为这是一个静态博客，您的点赞和评论想要被保存下来会比较困难。</p>
-<p>当然了，最令我激动的是，点进来的你（当然还有我自己），正在见证一个人的进步。😬😬😬</p>
-<p>希望400多天后的我，能够变得像我设想的一样出色。</p>
-]]></content>
     </entry>
 </feed>
