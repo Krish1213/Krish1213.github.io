@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Krish1213.github.io</id>
-    <title>晓伟的小站</title>
-    <updated>2020-11-18T02:54:48.172Z</updated>
+    <title>晓伟的Blog</title>
+    <updated>2020-11-18T05:30:33.615Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Krish1213.github.io"/>
     <link rel="self" href="https://Krish1213.github.io/atom.xml"/>
     <subtitle>这是一片净土</subtitle>
     <logo>https://Krish1213.github.io/images/avatar.png</logo>
     <icon>https://Krish1213.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, 晓伟的小站</rights>
+    <rights>All rights reserved 2020, 晓伟的Blog</rights>
     <entry>
         <title type="html"><![CDATA[你好，欢迎来到我的小站！]]></title>
         <id>https://Krish1213.github.io/post/ni-hao-huan-ying-lai-dao-wo-de-xiao-zhan/</id>
