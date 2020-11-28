@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Krish1213.github.io</id>
     <title>晓伟的Blog</title>
-    <updated>2020-11-20T16:08:24.226Z</updated>
+    <updated>2020-11-28T11:31:12.495Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Krish1213.github.io"/>
     <link rel="self" href="https://Krish1213.github.io/atom.xml"/>
@@ -10,6 +10,419 @@
     <logo>https://Krish1213.github.io/images/avatar.png</logo>
     <icon>https://Krish1213.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 晓伟的Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[ 好久好久没有更新了呀	]]></title>
+        <id>https://Krish1213.github.io/post/hao-jiu-hao-jiu-mei-you-geng-xin-liao-ya/</id>
+        <link href="https://Krish1213.github.io/post/hao-jiu-hao-jiu-mei-you-geng-xin-liao-ya/">
+        </link>
+        <updated>2020-11-28T11:26:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>Hey guys！😚</p>
+<p>​	我才发现，我已经好久没有更新了。这两个星期因为要完成**《管理信息系统》**小组作业，以及准备六级考试，我耽误了一下我的Python学习进度。🤓</p>
+<p>​	但是，但是啊！我没有弃掉！通过这两个星期我对<strong>飞机大战</strong>的学习，我对面向对象编程有了一个更深的理解。面向对象编程相较于面向过程编程来说，更现代化，更能够适应当代编程的需求。😌😌😌</p>
+<p>​	<strong>飞机大战</strong>现在的进度尚可，我基本完成了对于游戏环境以及飞船的对象构建，但是还没有将游戏的交互逻辑予以实现，这会是我接下来的工作。😁</p>
+<p>​	这两周做小组作业，一直在使用Matlab语言（广义上来说，算是吧，因为我认为闭源的编程语言不够geek，不够open🤣）,单纯就实现数学模型来说，Matlab可以算得上是一个好语言，它内部整合了非常多的数学函数，很多用其他语言可能需要数十行代码才能实现的功能，Matlab只需要调用一次函数就能够实现，这不得不说是Matlab的巨大优势，当然这也是商业语言的优势所在。但由于Matlab的语法和Python而言存在差异，而Python也是我目前主要学习的语言，所以我当前也正在学习Python的Numpy、Pandas、Matplotlib三大库，期望能够替代Matlab。当然啦，如果进度快的话，我会在期末之前完成学习，并用Python实现我期末论文的模型；最慢也会在寒假完成，但期末论文就不得不用Matlab再实现一次了（当然咯，最后一次💀）。</p>
+<p>​	最后提一嘴，驱动我用Python替代Matlab的另一个重要原因，就是Manim😈，如果我能够用Manim实现我的数学模型可视化，然后再毕业论文答辩上用，那真是非常非常非常酷！</p>
+<p>​	最后，如果有大佬路过，能不能够帮我精简一下这段代码：</p>
+<pre><code class="language-matlab">%%第一步，首先要根据样本点和圆心确认一个最远距离作为投针的半径
+%设置随机数种子（每次调用都要更新一次种子）
+clc;clear;
+load data.mat;
+
+ctime = datestr(now, 30);
+tseed = str2num(ctime((end - 5) : end)) ;
+rand('seed', tseed);
+
+len = length(CPoint);
+A_Dis = [];
+for i = 1:len
+    A_Dis = [A_Dis;distt(CPoint(i,1), CPoint(i,2), CerT(1,1),CerT(1,2))];
+end
+Radius = max(A_Dis);
+
+RA = 2000;
+top = 6;
+bottom=2;
+RunTime = 100;
+BestResult=1e9;
+BestRepository={};
+Bestclips=0;
+NumOfResult=0;
+
+%不浪漫的说，我想把它称作装弹夹法
+for Time = 1:RunTime
+    t = 1;
+    ExistPoint=CPoint;
+    clips=0;
+    Repository=cell(floor(len/bottom)+1,2); %一列存的是新生成点的经纬度坐标，二列求的是新生成点装的弹夹里的幸存点经纬度坐标，三列里
+    NowResult=0;
+    ExitCount=0;
+    while 1
+        [c,~]=size(ExistPoint);
+        if c==0
+            break;
+        end
+        if ExitCount==100
+            NowResult=1e10;
+            break;
+        end
+        if c&lt;bottom
+            NowResult=1e10;
+            break;
+        else
+            clips=clips+1;
+            [xi, yi]=DrawPoint(CerT(1,1), CerT(1,2), Radius, 1); %改变策略，每次只投一个点！
+            B_Dist=zeros(c,1);
+            bullet=0;
+            
+            
+            %算幸存点与新生成点之间的距离
+            for i=1:c
+                B_Dist(i,1)=Spherediff([ExistPoint(i,1), ExistPoint(i,2)], [xi,yi]);
+            end
+            
+            %算好距离之后，接下来要对这些距离进行排序
+            [a,b]=sort(B_Dist);
+
+            %排好序后，我们要进行“抓子弹”
+            %这里要考虑三点：一是新生成点的作业半径RA，二是新生成点的作业容量top，三是可容许的最小作业容量bottom
+            for i=1:c
+                if a(i,1)&lt;=RA
+                    if bullet&lt;top
+                        bullet=bullet+1;
+                    else
+                        break;
+                    end
+                else
+                    break;
+                end
+            end
+
+            if (bullet&lt;bottom)
+                ExitCount=ExitCount+1;
+                clips=clips-1;%该点作废
+                continue;
+            else
+                ExitCount=0;
+            end
+
+            %抓好子弹后，我们就要进行最重要的一步，“装填弹夹”
+
+            %模拟“装”
+            Repository{clips,1}=[xi,yi];
+            for i=1:bullet
+                Repository{clips,2}=[Repository{clips,2};ExistPoint(b(i,1),1),ExistPoint(b(i,1),2)];
+                NowResult=NowResult+a(i,1);
+            end
+
+            %将“装”上弹夹里的子弹从原来的弹池中删掉
+            %首先设一个索引一维数组Index
+            Index=zeros(1,bullet);
+            for i=1:bullet
+                Index(i)=b(i,1);
+            end
+            %然后通过索引批量删除ExistPoint中的行列
+            ExistPoint(Index,:)=[];
+        end
+        
+    end
+    if(NowResult&lt;BestResult)
+        BestResult=NowResult;
+        BestRepository=Repository;
+        Bestclips=clips;
+        NumOfResult=NumOfResult+1;
+    end
+end
+ msgbox({'哦我亲爱的孩子你的算法跑完了'})
+ Best1=[];
+ for i=1:Bestclips
+     Best1=[Best1;BestRepository{i,1}];
+ end
+
+
+function [x,y]=DrawPoint(x0,y0,R,num_Dian)
+    % 输入依次是：圆心横纵坐标，半径和点的数量
+    theta=0:0.001:360;
+    % 利用极坐标得到圆的坐标
+    Circle1=x0+R*cos(theta);
+    Circle2=y0+R*sin(theta);
+%     % 画圆
+%     plot(Circle1,Circle2,'r')
+     % 随机生成num_Dian个半径
+    r=R*sqrt(rand(1,num_Dian));
+    % 得到生成点的角度，并利用极坐标形式画出点
+    seta=2*pi*rand(1,num_Dian);
+    % 得到点的坐标
+    x=x0+r.*cos(seta);
+    y=y0+r.*sin(seta);
+%     hold on
+%     % 画出点
+%     plot(x,y,'*');
+end
+
+%Spherediff：给定两个经纬度坐标，求出两点的距离（单位：米）
+function [distance,deg] = Spherediff(x,y,R)
+ if nargin&lt;3
+ R = 6378137; %地球半径
+ end
+ x = deg2rad(x); %度转弧度
+ y = deg2rad(y);
+ DeltaS = acos(cos(x(2))*cos(y(2))*cos(x(1)-y(1))+sin(x(2))*sin(y(2)));
+ distance = R * DeltaS; %米2w
+ DeltaA = atan((x(1)-y(1))*cos(y(2))/(y(2)-y(1)));
+ deg = mod(DeltaA * 180/pi+360,360); %度
+end
+
+%distt:将地图平铺，求欧氏距离
+function dis=distt(x1,x2,y1,y2)
+    dis=sqrt(((x1-y1)^2)+((x2-y2)^2));
+end
+
+function LogicOut=Phase1(LogicIn, LogicRow, n)
+    if LogicIn==1
+        LogicOut = 1;
+        for i=1:n
+            if LogicRow(1,i)==0
+                LogicOut=0;
+                break;
+            end
+        end
+    else
+        LogicOut=0;
+    end
+end
+
+function [LogicOut, b, Result]=Phase2(LogicIn,B_Dist, len, n, top, re)
+%这里要区别于集合覆盖模型，两者的判断方式有所不同
+%首先是函数的输入，我们输入判断两点距离是否小于在RA之内的判断矩阵LogicMatrix，输入判断函数是否应该执行（即Phase1结果为True）的逻辑变量LogicIn，输入储存有两点之间距离的矩阵B_Dist,以及记载有行列信息的变量len和n,还有top和bottom
+%其次是函数的输出，LogicOut判断结果是否合格，在结果合格时，输出len行1列矩阵Result，代表每一个回收站对应的回收站
+%整个函数的目标，是得到回收站：快递网点的n：1关系，使得在范围内整个回收流程的总路程最低
+        Result=0;
+        b=0;
+    if LogicIn==1
+        LogicOut=1;
+        [g1, g2]=sort(B_Dist, 2);
+        CountCol=zeros(1,n);
+        for i=1:len
+            CountCol(g2(i,1))=CountCol(g2(i,1)) + 1;
+            Result=Result + g1(i,1);
+        end
+        b=g2(:,1);
+        for i=1:n
+            if CountCol(i)&gt;top
+                LogicOut = 0;
+            end
+        end
+    else
+        LogicOut=0;
+        Result=re;
+    end
+end
+</code></pre>
+]]></summary>
+        <content type="html"><![CDATA[<p>Hey guys！😚</p>
+<p>​	我才发现，我已经好久没有更新了。这两个星期因为要完成**《管理信息系统》**小组作业，以及准备六级考试，我耽误了一下我的Python学习进度。🤓</p>
+<p>​	但是，但是啊！我没有弃掉！通过这两个星期我对<strong>飞机大战</strong>的学习，我对面向对象编程有了一个更深的理解。面向对象编程相较于面向过程编程来说，更现代化，更能够适应当代编程的需求。😌😌😌</p>
+<p>​	<strong>飞机大战</strong>现在的进度尚可，我基本完成了对于游戏环境以及飞船的对象构建，但是还没有将游戏的交互逻辑予以实现，这会是我接下来的工作。😁</p>
+<p>​	这两周做小组作业，一直在使用Matlab语言（广义上来说，算是吧，因为我认为闭源的编程语言不够geek，不够open🤣）,单纯就实现数学模型来说，Matlab可以算得上是一个好语言，它内部整合了非常多的数学函数，很多用其他语言可能需要数十行代码才能实现的功能，Matlab只需要调用一次函数就能够实现，这不得不说是Matlab的巨大优势，当然这也是商业语言的优势所在。但由于Matlab的语法和Python而言存在差异，而Python也是我目前主要学习的语言，所以我当前也正在学习Python的Numpy、Pandas、Matplotlib三大库，期望能够替代Matlab。当然啦，如果进度快的话，我会在期末之前完成学习，并用Python实现我期末论文的模型；最慢也会在寒假完成，但期末论文就不得不用Matlab再实现一次了（当然咯，最后一次💀）。</p>
+<p>​	最后提一嘴，驱动我用Python替代Matlab的另一个重要原因，就是Manim😈，如果我能够用Manim实现我的数学模型可视化，然后再毕业论文答辩上用，那真是非常非常非常酷！</p>
+<p>​	最后，如果有大佬路过，能不能够帮我精简一下这段代码：</p>
+<pre><code class="language-matlab">%%第一步，首先要根据样本点和圆心确认一个最远距离作为投针的半径
+%设置随机数种子（每次调用都要更新一次种子）
+clc;clear;
+load data.mat;
+
+ctime = datestr(now, 30);
+tseed = str2num(ctime((end - 5) : end)) ;
+rand('seed', tseed);
+
+len = length(CPoint);
+A_Dis = [];
+for i = 1:len
+    A_Dis = [A_Dis;distt(CPoint(i,1), CPoint(i,2), CerT(1,1),CerT(1,2))];
+end
+Radius = max(A_Dis);
+
+RA = 2000;
+top = 6;
+bottom=2;
+RunTime = 100;
+BestResult=1e9;
+BestRepository={};
+Bestclips=0;
+NumOfResult=0;
+
+%不浪漫的说，我想把它称作装弹夹法
+for Time = 1:RunTime
+    t = 1;
+    ExistPoint=CPoint;
+    clips=0;
+    Repository=cell(floor(len/bottom)+1,2); %一列存的是新生成点的经纬度坐标，二列求的是新生成点装的弹夹里的幸存点经纬度坐标，三列里
+    NowResult=0;
+    ExitCount=0;
+    while 1
+        [c,~]=size(ExistPoint);
+        if c==0
+            break;
+        end
+        if ExitCount==100
+            NowResult=1e10;
+            break;
+        end
+        if c&lt;bottom
+            NowResult=1e10;
+            break;
+        else
+            clips=clips+1;
+            [xi, yi]=DrawPoint(CerT(1,1), CerT(1,2), Radius, 1); %改变策略，每次只投一个点！
+            B_Dist=zeros(c,1);
+            bullet=0;
+            
+            
+            %算幸存点与新生成点之间的距离
+            for i=1:c
+                B_Dist(i,1)=Spherediff([ExistPoint(i,1), ExistPoint(i,2)], [xi,yi]);
+            end
+            
+            %算好距离之后，接下来要对这些距离进行排序
+            [a,b]=sort(B_Dist);
+
+            %排好序后，我们要进行“抓子弹”
+            %这里要考虑三点：一是新生成点的作业半径RA，二是新生成点的作业容量top，三是可容许的最小作业容量bottom
+            for i=1:c
+                if a(i,1)&lt;=RA
+                    if bullet&lt;top
+                        bullet=bullet+1;
+                    else
+                        break;
+                    end
+                else
+                    break;
+                end
+            end
+
+            if (bullet&lt;bottom)
+                ExitCount=ExitCount+1;
+                clips=clips-1;%该点作废
+                continue;
+            else
+                ExitCount=0;
+            end
+
+            %抓好子弹后，我们就要进行最重要的一步，“装填弹夹”
+
+            %模拟“装”
+            Repository{clips,1}=[xi,yi];
+            for i=1:bullet
+                Repository{clips,2}=[Repository{clips,2};ExistPoint(b(i,1),1),ExistPoint(b(i,1),2)];
+                NowResult=NowResult+a(i,1);
+            end
+
+            %将“装”上弹夹里的子弹从原来的弹池中删掉
+            %首先设一个索引一维数组Index
+            Index=zeros(1,bullet);
+            for i=1:bullet
+                Index(i)=b(i,1);
+            end
+            %然后通过索引批量删除ExistPoint中的行列
+            ExistPoint(Index,:)=[];
+        end
+        
+    end
+    if(NowResult&lt;BestResult)
+        BestResult=NowResult;
+        BestRepository=Repository;
+        Bestclips=clips;
+        NumOfResult=NumOfResult+1;
+    end
+end
+ msgbox({'哦我亲爱的孩子你的算法跑完了'})
+ Best1=[];
+ for i=1:Bestclips
+     Best1=[Best1;BestRepository{i,1}];
+ end
+
+
+function [x,y]=DrawPoint(x0,y0,R,num_Dian)
+    % 输入依次是：圆心横纵坐标，半径和点的数量
+    theta=0:0.001:360;
+    % 利用极坐标得到圆的坐标
+    Circle1=x0+R*cos(theta);
+    Circle2=y0+R*sin(theta);
+%     % 画圆
+%     plot(Circle1,Circle2,'r')
+     % 随机生成num_Dian个半径
+    r=R*sqrt(rand(1,num_Dian));
+    % 得到生成点的角度，并利用极坐标形式画出点
+    seta=2*pi*rand(1,num_Dian);
+    % 得到点的坐标
+    x=x0+r.*cos(seta);
+    y=y0+r.*sin(seta);
+%     hold on
+%     % 画出点
+%     plot(x,y,'*');
+end
+
+%Spherediff：给定两个经纬度坐标，求出两点的距离（单位：米）
+function [distance,deg] = Spherediff(x,y,R)
+ if nargin&lt;3
+ R = 6378137; %地球半径
+ end
+ x = deg2rad(x); %度转弧度
+ y = deg2rad(y);
+ DeltaS = acos(cos(x(2))*cos(y(2))*cos(x(1)-y(1))+sin(x(2))*sin(y(2)));
+ distance = R * DeltaS; %米2w
+ DeltaA = atan((x(1)-y(1))*cos(y(2))/(y(2)-y(1)));
+ deg = mod(DeltaA * 180/pi+360,360); %度
+end
+
+%distt:将地图平铺，求欧氏距离
+function dis=distt(x1,x2,y1,y2)
+    dis=sqrt(((x1-y1)^2)+((x2-y2)^2));
+end
+
+function LogicOut=Phase1(LogicIn, LogicRow, n)
+    if LogicIn==1
+        LogicOut = 1;
+        for i=1:n
+            if LogicRow(1,i)==0
+                LogicOut=0;
+                break;
+            end
+        end
+    else
+        LogicOut=0;
+    end
+end
+
+function [LogicOut, b, Result]=Phase2(LogicIn,B_Dist, len, n, top, re)
+%这里要区别于集合覆盖模型，两者的判断方式有所不同
+%首先是函数的输入，我们输入判断两点距离是否小于在RA之内的判断矩阵LogicMatrix，输入判断函数是否应该执行（即Phase1结果为True）的逻辑变量LogicIn，输入储存有两点之间距离的矩阵B_Dist,以及记载有行列信息的变量len和n,还有top和bottom
+%其次是函数的输出，LogicOut判断结果是否合格，在结果合格时，输出len行1列矩阵Result，代表每一个回收站对应的回收站
+%整个函数的目标，是得到回收站：快递网点的n：1关系，使得在范围内整个回收流程的总路程最低
+        Result=0;
+        b=0;
+    if LogicIn==1
+        LogicOut=1;
+        [g1, g2]=sort(B_Dist, 2);
+        CountCol=zeros(1,n);
+        for i=1:len
+            CountCol(g2(i,1))=CountCol(g2(i,1)) + 1;
+            Result=Result + g1(i,1);
+        end
+        b=g2(:,1);
+        for i=1:n
+            if CountCol(i)&gt;top
+                LogicOut = 0;
+            end
+        end
+    else
+        LogicOut=0;
+        Result=re;
+    end
+end
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[哒哒哒，给自己定一个周六的小目标吧！]]></title>
         <id>https://Krish1213.github.io/post/da-da-da-gei-zi-ji-ding-yi-ge-zhou-liu-de-xiao-mu-biao-ba/</id>
