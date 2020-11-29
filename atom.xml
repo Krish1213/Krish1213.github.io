@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Krish1213.github.io</id>
     <title>晓伟的Blog</title>
-    <updated>2020-11-28T11:31:12.495Z</updated>
+    <updated>2020-11-29T14:48:32.341Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Krish1213.github.io"/>
     <link rel="self" href="https://Krish1213.github.io/atom.xml"/>
@@ -10,6 +10,13 @@
     <logo>https://Krish1213.github.io/images/avatar.png</logo>
     <icon>https://Krish1213.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, 晓伟的Blog</rights>
+    <entry>
+        <title type="html"><![CDATA[做一个周末小结吧]]></title>
+        <id>https://Krish1213.github.io/post/My_heart_is_broken/</id>
+        <link href="https://Krish1213.github.io/post/My_heart_is_broken/">
+        </link>
+        <updated>2020-11-29T14:10:18.000Z</updated>
+    </entry>
     <entry>
         <title type="html"><![CDATA[ 好久好久没有更新了呀	]]></title>
         <id>https://Krish1213.github.io/post/hao-jiu-hao-jiu-mei-you-geng-xin-liao-ya/</id>
